@@ -7,7 +7,6 @@ var bio = {
 		"mobile":"636-851-7195",
 		"email":"javacoder26@gmail.com",
 		"github":"https://github.com/doindev",
-		"twitter":undefined,
 		"location":"Saint Charles, MO 63304"
 	}, 
 	"welcomeMessage":"Welcome to my resume", 
@@ -89,6 +88,7 @@ var work = {
 					HTMLworkEmployer.replace("%data%", job.employer) + 
 					HTMLworkTitle.replace("%data%", job.title) + 
 					HTMLworkDates.replace("%data%", job.dates) +
+					HTMLworkLocation.replace("%data%", job.location) +
 					HTMLworkDescription.replace("%data%", job.description)
 				);
 			}
@@ -127,17 +127,17 @@ var education = {
 		"name":"ITT Technical Institute", 
 		"location":"Earth City, MO 63045", 
 		"degree":"BAS",
-		"dates":1999, 
-		"url":"http://www.itt-tech.edu", 
-		"majors":["Electronics Engineering"]
+		"majors":["Electronics Engineering"],
+		"dates":"1999", 
+		"url":"http://www.itt-tech.edu"
 		},
 		{
 		"name":"Missouri Technical Institute", 
 		"location":"Maryland Heights, MO 63043", 
 		"degree":"AAS",
-		"dates":1997, 
-		"url":"http://www.motech.edu", 
-		"majors":["Electronics Engineering"]
+		"majors":["Electronics Engineering"],
+		"dates":"1997", 
+		"url":"http://www.motech.edu"
 		}
 	],
 	"onlineCources":[
@@ -152,7 +152,10 @@ var education = {
 		if($(education.schools).length>0){
 			$.each(education.schools, function(index, school){
 				$("#education").append(HTMLschoolStart);
-				$(".education-entry:last").append(HTMLschoolName.replace("%data%", school.name) + HTMLschoolDegree.replace("%data%", school.degree));
+				$(".education-entry:last").append(
+					HTMLschoolName.replace("%data%", school.name).replace("#", school.url) + 
+					HTMLschoolDegree.replace("%data%", school.degree)
+				);
 				$(".education-entry:last").append(HTMLschoolDates.replace("%data%", school.dates));
 				$(".education-entry:last").append(HTMLschoolLocation.replace("%data%", school.location));
 				$(".education-entry:last").append(HTMLschoolMajor.replace("%data%", school.majors.join()));
@@ -164,7 +167,9 @@ var education = {
 				$("#education").append(HTMLschoolStart);
 				$(".education-entry:last").append(HTMLonlineTitle.replace("%data%", course.title) + HTMLonlineSchool.replace("%data%", course.school));
 				$(".education-entry:last").append(HTMLonlineDates.replace("%data%", course.dates));
-				$(".education-entry:last").append(HTMLonlineURL.replace("%data%", course.url));
+				$(".education-entry:last").append(
+					HTMLonlineURL.replace("%data%", course.url).replace("#", course.url)	
+				);
 			});
 		}
 	}
